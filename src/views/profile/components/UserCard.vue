@@ -18,6 +18,24 @@
     </div>
 
     <div class="user-bio">
+      <div class="user-dept user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>系别</span></div>
+        <div class="user-bio-section-body">
+          <div class="text-muted">
+            计算机应用系
+          </div>
+        </div>
+      </div>
+
+      <div class="user-class user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>班级</span></div>
+        <div class="user-bio-section-body">
+          <div class="text-muted">
+            计科19-本1
+          </div>
+        </div>
+      </div>
+
       <div class="user-education user-bio-section">
         <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>Education</span></div>
         <div class="user-bio-section-body">

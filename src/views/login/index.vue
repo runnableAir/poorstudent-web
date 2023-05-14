@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">贫困生管理系统-登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -13,7 +13,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
+          :placeholder="passwordPlaceholder"
           name="username"
           type="text"
           tabindex="1"
@@ -30,7 +30,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="Password"
+          placeholder="密码"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -41,12 +41,22 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-form-item prop="role" style="margin-top: 15px; line-height: 50px;">
+        <span class="svg-container">
+          <svg-icon icon-class="star" />
+        </span>
+        <div class="role-pre-text" style="display: inline;">
+          <span>角色</span>
+        </div>
+        <el-radio-group v-model="loginForm.role" size="medium">
+          <el-radio-button label="0" class="radio-btn">学生</el-radio-button>
+          <el-radio-button label="1" class="radio-btn">班主任</el-radio-button>
+          <el-radio-button label="2" class="radio-btn">辅导员</el-radio-button>
+          <el-radio-button label="3" class="radio-btn">管理员</el-radio-button>
+        </el-radio-group>
+      </el-form-item>
 
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
     </el-form>
   </div>
@@ -74,8 +84,9 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: '',
+        role: '0'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -84,6 +95,11 @@ export default {
       loading: false,
       passwordType: 'password',
       redirect: undefined
+    }
+  },
+  computed: {
+    passwordPlaceholder() {
+      return this.loginForm.role === '0' ? '学号' : '工号'
     }
   },
   watch: {
@@ -129,7 +145,7 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
+$bg:#3954a1;
 $light_gray:#fff;
 $cursor: #fff;
 
@@ -177,6 +193,11 @@ $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
+.role-pre-text {
+  color: #c0c4cc;
+  margin-left: 15px;
+  margin-right: 25px;
+}
 .login-container {
   min-height: 100%;
   width: 100%;

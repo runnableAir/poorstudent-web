@@ -1,8 +1,9 @@
 <template>
   <div class="apply-index-container">
-    <h3 class="title">申请列表</h3>
+    <h3 class="title">申请入口列表</h3>
     <div class="table-container">
       <el-table
+        v-loading="listLoading"
         :data="tableData"
         style="width: 1050px"
       >
@@ -37,11 +38,7 @@
           align="center"
           min-width="150"
         >
-          <template slot-scope="{row}">
-            <el-button :type="row.hasApply ? 'info' : 'primary'" size="mini">
-              {{ row.hasApply ? '已申请' : '申请' }}
-            </el-button>
-          </template>
+          <el-button type="primary" size="small">详情</el-button>
         </el-table-column>
       </el-table>
     </div>
@@ -49,7 +46,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { fetchApplies } from '@/api/apply'
 
 export default {
   name: 'Apply',
@@ -65,51 +62,20 @@ export default {
   data() {
     return {
       user: {},
-      tableData: [{
-        date: '2019-05-01 ~ 2019.06.01',
-        year: '2019-2020',
-        title: '家庭经济困难学生认定2019-2020',
-        status: '进行中',
-        hasApply: false
-      }, {
-        date: '2019-05-01 ~ 2019.06.01',
-        year: '2019-2020',
-        title: '家庭经济困难学生认定2019-2020',
-        status: '结束',
-        hasApply: false
-      }, {
-        date: '2019-05-01 ~ 2019.06.01',
-        year: '2019-2020',
-        title: '家庭经济困难学生认定2019-2020',
-        status: '结束',
-        hasApply: true
-      }, {
-        date: '2019-05-01 ~ 2019.06.01',
-        year: '2019-2020',
-        title: '家庭经济困难学生认定2019-2020',
-        status: '结束',
-        hasApply: true
-      }]
+      tableData: [],
+      listLoading: false
     }
   },
-  computed: {
-    ...mapGetters([
-      'name',
-      'avatar',
-      'roles'
-    ])
-  },
   created() {
-    this.getUser()
+    this.fetchAppliesData()
   },
   methods: {
-    getUser() {
-      this.user = {
-        name: this.name,
-        role: this.roles.join(' | '),
-        email: 'admin@test.com',
-        avatar: this.avatar
-      }
+    fetchAppliesData() {
+      this.listLoading = true
+      fetchApplies().then(response => {
+        this.tableData = response.data.items
+        this.listLoading = false
+      })
     }
   }
 }

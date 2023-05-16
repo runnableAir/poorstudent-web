@@ -68,6 +68,18 @@ export const constantRoutes = [
   },
 
   {
+    path: '/apply',
+    component: Layout,
+    redirect: '/apply/index',
+    children: [{
+      path: 'index',
+      name: 'Apply',
+      component: () => import('@/views/apply/index'),
+      meta: { title: '个人申请', icon: 'el-icon-s-order' }
+    }]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

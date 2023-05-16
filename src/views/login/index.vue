@@ -41,7 +41,7 @@
         </span>
       </el-form-item>
 
-      <el-form-item prop="role" style="margin-top: 15px; line-height: 50px;">
+      <el-form-item prop="role" class="form-item-radio-group" style="margin-top: 15px; line-height: 50px;">
         <span class="svg-container">
           <svg-icon icon-class="star" />
         </span>
@@ -146,8 +146,8 @@ export default {
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
 $bg:#3954a1;
-$light_gray:#fff;
-$cursor: #fff;
+$light_gray:#2c2c2c;
+$cursor: #a0a0a0;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
@@ -185,6 +185,22 @@ $cursor: #fff;
     border-radius: 5px;
     color: #454545;
   }
+
+  .form-item-radio-group {
+    .el-radio-button__inner {
+      background-color: transparent;
+      border: 0;
+      border-radius: 4px;
+      color: #8d8d8d;
+    }
+    .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+      color: #FFF;
+      background-color: #409EFF;
+      border-color: #409EFF;
+      -webkit-box-shadow: -1px 0 0 0 #409EFF;
+      box-shadow: -1px 0 0 0 #409EFF;
+    }
+  }
 }
 </style>
 
@@ -194,7 +210,7 @@ $dark_gray:#889aa4;
 $light_gray:#eee;
 
 .role-pre-text {
-  color: #c0c4cc;
+  color: #78797a;
   margin-left: 15px;
   margin-right: 25px;
 }
@@ -202,14 +218,34 @@ $light_gray:#eee;
   min-height: 100%;
   width: 100%;
   background-color: $bg;
+  background: url(https://img.zcool.cn/community/0168415d91c87ea8012060be097056.png@1280w_1l_2o_100sh.png);
+  background-size: cover;
   overflow: hidden;
 
   .login-form {
     position: relative;
-    width: 520px;
+    width: 480px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    margin: 165px auto 0;
+    padding: 30px 30px 5px;
+    z-index: 1;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .login-form::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    /* + 两边各有一个空格  否则 无效*/
+    height: calc(100% + 20px);
+    background: #fff;
+    // box-shadow: 0 0 0 300px #102083a3 inset;
+    box-shadow: 0 0 8px 7px #000;
+    z-index: -1;
+    filter: blur(6px);
     overflow: hidden;
   }
 
@@ -238,7 +274,7 @@ $light_gray:#eee;
 
     .title {
       font-size: 26px;
-      color: $light_gray;
+      color: #656565;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;

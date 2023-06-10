@@ -94,6 +94,40 @@ export const constantRoutes = [
   },
 
   {
+    path: '/judge',
+    component: Layout,
+    redirect: '/judge/group',
+    name: 'Example',
+    alwaysShow: 'true',
+    meta: { title: '申请评议', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'group',
+        name: 'Group',
+        component: () => import('@/views/judge/group'),
+        meta: { title: '评议小组', icon: 'table' }
+      },
+      {
+        path: 'fenpei',
+        name: 'Fenpei',
+        component: () => import('@/views/judge/fenpei'),
+        meta: { title: '评议任务分配', icon: 'table' }
+      },
+      {
+        path: 'pingyi',
+        name: 'Pingyi',
+        component: () => import('@/views/judge/pingyi'),
+        meta: { title: '评议投票', icon: 'table' }
+      },
+      {
+        path: 'jieguo',
+        name: 'Jieguo',
+        component: () => import('@/views/judge/jieguo'),
+        meta: { title: '评议结果', icon: 'table' }
+      }
+    ]
+  },
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

@@ -71,11 +71,25 @@ export const constantRoutes = [
     path: '/apply',
     component: Layout,
     redirect: '/apply/index',
+    name: 'Apply',
+    alwaysShow: 'true',
+    meta: { title: '申请管理', icon: 'el-icon-s-help' },
     children: [{
       path: 'index',
-      name: 'Apply',
+      name: 'Apply Index',
       component: () => import('@/views/apply/index'),
       meta: { title: '个人申请', icon: 'el-icon-s-order' }
+    }, {
+      path: 'details/:id(\\d+)',
+      name: 'Apply Details',
+      hidden: true,
+      component: () => import('@/views/apply/details'),
+      meta: { title: '申请入口详情', icon: 'el-icon-s-order' }
+    }, {
+      path: 'judge',
+      name: 'Judge list',
+      component: () => import('@/views/apply/judge'),
+      meta: { title: '申请审核列表', icon: 'el-icon-s-order' }
     }]
   },
 

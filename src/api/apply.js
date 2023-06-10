@@ -6,3 +6,10 @@ export function fetchApplies() {
     method: 'get'
   })
 }
+
+export function getApplyDetails(id) {
+  return request({
+    url: `/vue-admin-template/applies/details/${id}`,
+    method: 'get'
+  })
+}
